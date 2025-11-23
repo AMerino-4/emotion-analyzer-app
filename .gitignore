@@ -1,0 +1,11 @@
+# Node.js
+node_modules/
+.env
+
+# Vercel / Netlify
+.vercel/
+.netlify/
+
+# macOS / Windows / Linux common system files
+.DS_Store
+Thumbs.db
