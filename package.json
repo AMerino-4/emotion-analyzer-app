@@ -1,0 +1,31 @@
+{
+  "name": "emotion-analyzer-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AMerino-4/emotion-analyzer-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AMerino-4/emotion-analyzer-app/issues"
+  },
+  "homepage": "https://github.com/AMerino-4/emotion-analyzer-app#readme",
+  "dependencies": {
+    "@aws-sdk/client-rekognition": "^3.936.0",
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "fluent-ffmpeg": "^2.1.3",
+    "multer": "^2.0.2",
+    "p-limit": "^7.2.0"
+  }
+}

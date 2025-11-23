@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zoom Social Skills Analyzer</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Zoom Social Skills Analyzer</h1>
+  </header>
+
+  <main>
+    <section id="upload-section">
+      <h2>Upload Zoom Recording</h2>
+      <form id="zoom-upload-form">
+        <input type="file" name="zoomVideo" accept="video/*" required />
+        <button type="submit">Upload & Analyze</button>
+      </form>
+    </section>
+
+    <section id="visualizations-section" style="display:none;">
+      <h2>Analysis Results</h2>
+      <div id="charts-container">
+        <canvas id="speakingChart"></canvas>
+        <canvas id="emotionChart"></canvas>
+        <canvas id="eyeDirectionChart"></canvas>
+        <canvas id="eyesMouthChart"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Social Skills Analyzer</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("zoom-upload-form");
+      const chartsSection = document.getElementById("visualizations-section");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const file = form.zoomVideo.files[0];
+        if (!file) return alert("Please select a video.");
+
+        const formData = new FormData();
+        formData.append("video", file);
+
+        const button = form.querySelector("button");
+        button.disabled = true;
+        button.textContent = "Processing...";
+
+        try {
+          const res = await fetch("/analyze-video", { method: "POST", body: formData });
+          const data = await res.json();
+
+          chartsSection.style.display = "block";
+
+          // Speaking Ratio Chart
+          new Chart(document.getElementById("speakingChart"), {
+            type: "bar",
+            data: {
+              labels: ["Speaker", "Audience"],
+              datasets: [{
+                label: "Speaking Frames",
+                data: [data.speakingRatio.speakerSpeakingFrames, data.speakingRatio.audienceSpeakingFrames],
+                backgroundColor: ["#4a90e2", "#f5a623"]
+              }]
+            },
+            options: { responsive: true, plugins: { title: { display: true, text: "Speaker vs Audience Speaking" } } }
+          });
+
+          // Audience Emotion Chart
+          new Chart(document.getElementById("emotionChart"), {
+            type: "bar",
+            data: {
+              labels: ["Positive", "Negative"],
+              datasets: [{
+                label: "Audience Emotions",
+                data: [data.audienceEmotionBalance.positive, data.audienceEmotionBalance.negative],
+                backgroundColor: ["#7ed321", "#d0021b"]
+              }]
+            },
+            options: { responsive: true, plugins: { title: { display: true, text: "Audience Emotion Balance" } } }
+          });
+
+          // Eye Direction Chart
+          new Chart(document.getElementById("eyeDirectionChart"), {
+            type: "bar",
+            data: {
+              labels: Object.keys(data.eyeDirectionCounts),
+              datasets: [{
+                label: "Eye Direction Counts",
+                data: Object.values(data.eyeDirectionCounts),
+                backgroundColor: ["#4a90e2","#f5a623","#50e3c2","#bd10e0"]
+              }]
+            },
+            options: { responsive: true, plugins: { title: { display: true, text: "Eye Direction Distribution" } } }
+          });
+
+          // Eyes & Mouth Open Chart
+          new Chart(document.getElementById("eyesMouthChart"), {
+            type: "bar",
+            data: {
+              labels: ["Eyes Open", "Mouth Open"],
+              datasets: [{
+                label: "Frames",
+                data: [data.eyesMouthCounts.eyesOpen, data.eyesMouthCounts.mouthOpen],
+                backgroundColor: ["#7ed321","#d0021b"]
+              }]
+            },
+            options: { responsive: true, plugins: { title: { display: true, text: "Eyes & Mouth Open Counts" } } }
+          });
+
+        } catch (err) {
+          alert("Analysis failed: " + err.message);
+        } finally {
+          button.disabled = false;
+          button.textContent = "Upload & Analyze";
+        }
+      });
+    });
+  </script>
+</body>
+</html>
