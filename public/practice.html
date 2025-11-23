@@ -1,45 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Practice Video Feedback</title>
-  <link rel="stylesheet" href="css/style.css">
-
-  <!-- Chart.js CDN -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<!-- Your main.js -->
-<script src="js/main.js"></script>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practice</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script defer src="js/reflection.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <header>
-    <h1>Practice Video Feedback</h1>
-    <nav>
-      <a href="index.html">Zoom Upload</a> |
-      <a href="practice.html">Practice Video</a> |
-      <a href="audience.html">Audience Survey</a>
-    </nav>
+  <header class="site-header">
+    <div class="container header-row">
+      <div class="brand">FeedbackOm</div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="zoom.html">Zoom Analyzer</a>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <h2>Upload Your Practice Video</h2>
-    <form id="practice-upload-form" enctype="multipart/form-data">
-  <label>Practice video (MP4):
-    <input type="file" name="practiceVideo" accept="video/mp4" required>
-  </label><br><br>
-  <button type="submit">Upload and Analyze</button>
-</form>
-
-<div id="practice-visualizations"></div>
-
-
-    <div id="visualizations">
-      <!-- Visualizations for practice feedback -->
-    </div>
+    <h2>Practice Session</h2>
+    <form id="practice-form">
+      <label for="practiceVideo">Upload your practice video:</label>
+      <input type="file" id="practiceVideo" name="practiceVideo" accept="video/*">
+      <button type="submit">Analyze</button>
+    </form>
+    <div id="visualizations"></div>
   </main>
-
-  <script src="js/videoProcessing.js"></script>
-  <script src="js/main.js"></script>
 </body>
 </html>

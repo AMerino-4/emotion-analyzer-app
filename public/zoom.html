@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zoom Analyzer</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script defer src="js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <div class="brand">FeedbackOm</div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="practice.html">Practice</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h2>Zoom Meeting Analyzer</h2>
+    <form id="zoom-upload-form">
+      <label for="zoomVideo">Upload Zoom video:</label>
+      <input type="file" id="zoomVideo" name="video" accept="video/*">
+      <button type="submit">Upload and Analyze</button>
+    </form>
+    <div id="visualizations"></div>
+  </main>
+</body>
+</html>
