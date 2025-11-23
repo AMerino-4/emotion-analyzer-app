@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Audience Feedback</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Audience Feedback</h1>
+    <nav>
+      <a href="index.html">Zoom Upload</a> |
+      <a href="practice.html">Practice Video</a> |
+      <a href="audience.html">Audience Survey</a>
+    </nav>
+  </header>
+
+  <main>
+  <h2>Rate the Presenter</h2>
+  <form id="audience-survey-form">
+    <!-- Slider questions -->
+    <label>First 10 seconds impression:
+      <input type="range" name="firstImpression" min="0" max="10">
+    </label><br><br>
+
+    <label>Overall engagement:
+      <input type="range" name="engagement" min="0" max="10">
+    </label><br><br>
+
+    <label>Clarity of presentation:
+      <input type="range" name="clarity" min="0" max="10">
+    </label><br><br>
+
+    <!-- Written feedback -->
+    <label>What did you like most about the presentation?
+      <textarea name="positiveFeedback" rows="4" placeholder="Write your thoughts here..."></textarea>
+    </label><br><br>
+
+    <label>What could be improved?
+      <textarea name="improvementFeedback" rows="4" placeholder="Suggestions for improvement..."></textarea>
+    </label><br><br>
+
+    <button type="submit">Submit Feedback</button>
+  </form>
+</main>
+
+
+  <script src="js/main.js"></script>
+</body>
+</html>
